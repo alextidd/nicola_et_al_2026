@@ -1,7 +1,9 @@
 # Polyclonal selection of immune checkpoint mutations in thyroid autoimmunity
 
 > **Paper:** Polyclonal selection of immune checkpoint mutations in thyroid autoimmunity
+
 > **Authors:** Nicola, Lawson, et al.  
+
 > **Year:** 2026
 
 This repository contains all analyses that were run on the PTA sequencing data
@@ -23,7 +25,7 @@ analysis with `Sequoia`, and signature analysis with `HDP`, `sigfit` and
 
 ---
 
-## Requirements
+## Dependencies
 
 ### Languages
 
@@ -40,10 +42,14 @@ script to add the correct `--mpboot_path` parameter.
 
 ### Nextflow pipelines
 
+The analysis depends on the following Nextflow pipelines.
+
 - [nf-core/bamtofastq](https://github.com/nf-core/bamtofastq)
 - [alextidd/nf-resolveome](https://github.com/alextidd/nf-resolveome)
 - [alextidd/bj-dna-qc](https://github.com/alextidd/bj-dna-qc)
 - [alextidd/bj-somatic-variantcalling](https://github.com/alextidd/bj-somatic-variantcalling)
+
+Please download these into the `nextflow/` subdirectory.
 
 ### Python packages
 
@@ -108,7 +114,6 @@ The following datasets are not included in this repository and must be downloade
 
 ```
 .
-├── README.md
 ├── bin
 │   ├── build_phylogeny.R
 │   ├── run_Sigprofiler_Assignment.py
@@ -116,12 +121,16 @@ The following datasets are not included in this repository and must be downloade
 │   └── run_Sigprofiler_Extractor.py
 ├── config
 │   ├── basejumper.config
-│   ├── bj-somatic-variantcalling.config
-│   └── bj-somatic-variantcalling_dnahyb.config
+│   ├── bj-somatic-variantcalling_dnahyb.config
+│   └── bj-somatic-variantcalling.config
 ├── data
 │   ├── nanoseq
 │   │   ├── hashimoto_exome_targeted_combined_muts.tsv
 │   │   └── metadata.yaml
+│   ├── reference
+│   │   └── gatk
+│   │       └── GRCh38
+│   │           └── genome.fa.dict
 │   ├── resolveome
 │   │   ├── manual_inspection
 │   │   │   ├── 20250902_pta_additional_annotation_H1.tsv
@@ -153,6 +162,7 @@ The following datasets are not included in this repository and must be downloade
 │   └── vdj_coverage
 │       ├── ig_tcr_genes_pseudogenes.tsv
 │       └── metadata.yaml
+├── README.md
 └── src
     └── resolveome
         ├── basejumper
@@ -184,49 +194,54 @@ The following datasets are not included in this repository and must be downloade
 
 ## How to run
 
-### 1. Clone the repository
+Clone the repository.
 
 ```bash
-git clone https://github.com/username/repo-name.git
-cd repo-name
+git clone https://github.com/alextidd/nicola_et_al_2026/
+cd nicola_et_al_2026
 ```
 
-### 2. Install dependencies
+Install all dependencies described in the [Dependencies](#dependencies) section
+above. 
 
-```r
-# In R
-install.packages(c("tidyverse", "ggplot2", "patchwork"))
-# Add any Bioconductor packages:
-BiocManager::install(c("GenomicRanges", "deepSNV"))
+Download all external data listed in the [Data](#data) section above.
+
+Scripts are numbered and intended to be run in the following order.
+
 ```
-
-### 3. Download data
-
-Follow the instructions in the [Data](#data) section above, then verify:
-
-```bash
-bash scripts/check_data.sh
+src/resolveome/
+│
+│   # 1. DNA QC and somatic variant calling
+├── basejumper                   
+│   ├── 00_liftover_immune_panel_intervals.R
+│   ├── 00_setup.R
+│   ├── 01_bamtofastq_run.sh
+│   ├── 02_bj-dna-qc_dna_run.sh
+│   ├── 03_bj-somatic-variantcalling_dna_run.sh
+│   └── 04_bj-somatic-variantcalling_dnahyb_run.sh
+│
+│   # 2. somatic variant genotyping
+├── nf-resolveome                
+│   ├── 00_get_vdj_regions.R
+│   ├── 00_setup.R
+│   ├── 01_dna_run.sh
+│   ├── 02_dnahyb_run.sh
+│   └── 03_phase_snps.Rmd
+│
+│   # 3. build phylogeny
+├── sequoia                      
+│   └── 01_run_sequoia.R
+│
+│   # 4. signature analysis
+└── signatures
+    ├── 00_get_ref_signatures.R
+    ├── 01_generate_matrices.R
+    ├── 02a_run_hdp.R
+    ├── 02b_run_sigfit.R
+    ├── 03a_run_sigprofiler_extractor.sh
+    ├── 03b_run_sigprofiler_decomposition.py
+    └── 03c_run_sigprofiler_assignment.sh
 ```
-
-### 4. Run the analysis
-
-Scripts are numbered and intended to be run in order:
-
-```bash
-Rscript scripts/01_preprocess.R
-Rscript scripts/02_analysis.R
-Rscript scripts/03_figures.R
-```
-
-Alternatively, run the full pipeline end-to-end:
-
-```bash
-bash run_all.sh
-```
-
-Output figures will be written to `results/figures/` and tables to `results/tables/`.
-
-> **Note:** Approximate runtime and memory requirements on a standard workstation: ~X hours, ~X GB RAM.
 
 ---
 

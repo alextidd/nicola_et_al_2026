@@ -14,7 +14,7 @@ export LSB_EXCLUSIVE=Y
 # run
 (
   cd out/resolveome/basejumper/bj-somatic-variantcalling/dna/$donor_id/
-  nextflow run $NFS_TEAM/nextflow/external/basejumper/bj-somatic-variantcalling \
+  nextflow run nextflow/external/basejumper/bj-somatic-variantcalling \
     --input_csv samplesheet.csv \
     --publish_dir $donor_id \
     --timestamp run \

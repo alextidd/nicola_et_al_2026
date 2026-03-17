@@ -14,7 +14,7 @@ export LSB_EXCLUSIVE=Y
 # run
 (
   cd out/resolveome/basejumper/bj-dna-qc/dna/$donor_id/
-  nextflow run $NFS_TEAM/nextflow/external/basejumper/bj-dna-qc \
+  nextflow run nextflow/external/basejumper/bj-dna-qc \
     --input_csv samplesheet.csv \
     --publish_dir $donor_id \
     --timestamp run \

@@ -6,7 +6,7 @@ wd=$(pwd)
 # run
 (
   cd out/resolveome/nf-resolveome/dna/
-  nextflow run $NFS_TEAM/nextflow/nf-resolveome \
+  nextflow run nextflow/nf-resolveome \
     --samplesheet samplesheet.csv \
     --seq_type dna \
     --bait_set_hyb $wd/out/twist/Probes_merged_ok_combined_Sanger_Immune-v1_TE-91661256_hg19.bed \
