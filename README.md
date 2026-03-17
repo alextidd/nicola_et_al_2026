@@ -7,7 +7,9 @@ mpboot
 # Polyclonal selection of immune checkpoint mutations in thyroid autoimmunity
 
 > **Paper:** Polyclonal selection of immune checkpoint mutations in thyroid autoimmunity
+
 > **Authors:** Nicola, Lawson, et al.  
+
 > **Year:** 2026
 
 This repository contains all analyses that were run on the PTA sequencing data

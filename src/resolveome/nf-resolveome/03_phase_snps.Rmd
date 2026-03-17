@@ -1,0 +1,280 @@
+---
+title: "Phase 1p SNPs in ResolveOME and call breakpoints"
+author: "Alexandra Tidd"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    fig_width: 8
+    keep_md: true
+    toc: true
+    toc_float: true
+    toc_collapsed: true
+    toc_depth: 4
+    theme: lumen
+---
+
+```{r setup, include = FALSE}
+# rmarkdown::render('src/resolveome/nf-resolveome/03_phase_snps.Rmd', output_file = 'phase_snps.html', output_dir = 'out/phase_snps/')
+
+# chunk options
+cache_path <- "out/phase_snps/phase_snps_cache/"
+knitr::opts_knit$set(root.dir = "../../..")
+knitr::opts_chunk$set(
+  warning = FALSE,
+  message = FALSE,
+  dpi = 300,
+  cache.path = cache_path,
+  fig.align = "center"
+)
+```
+
+```{r setup2, include = FALSE}
+# create cache path
+dir.create(cache_path, showWarnings = FALSE)
+
+# libraries
+library(knitr)
+library(magrittr)
+library(dplyr)
+library(ggplot2)
+library(rtracklayer)
+library(GenomicRanges)
+library(slider)
+library(patchwork)
+
+# function: plot baf
+plot_baf <- function(p_dat) {
+  # prep data
+  p_dat2 <-
+    p_dat %>%
+    filter(total_depth > 4) %>%
+    dplyr::mutate(mut_baf = 1 - mut_vaf,
+                  chr = factor(sub("^chr", "", chr),
+                               levels = c(as.character(1:22), "X", "Y")),
+                  `pos (Mb)` = pos / 1e6) %>%
+    tidyr::pivot_longer(cols = c("mut_vaf", "mut_baf"), names_to = "vaf_type")
+
+  # prep phased data
+  p_dat_phased <-
+    p_dat2 %>%
+    filter(!is.na(hap_A_vaf) & vaf_type == "mut_vaf")
+
+  # plot
+  p_dat2 %>%
+    ggplot(aes(x = `pos (Mb)`, y = value)) +
+    # add line at vaf = 0.5
+    geom_hline(yintercept = 0.5, colour = "red") +
+    # add baf points
+    geom_point(size = 0.8, alpha = 0.2) +
+    # add phased points
+    geom_point(data = p_dat_phased, aes(y = hap_A_vaf), colour = "#e03ba9",
+               size = 1) +
+    geom_point(data = p_dat_phased, aes(y = hap_B_vaf), colour = "#00ccff",
+               size = 1) +
+    # add line at TNFRSF14
+    geom_vline(xintercept = 2487078 / 1e6, colour = "green") +
+    # increase x axis breaks
+    scale_x_continuous(expand = c(0, 0),
+                       breaks = pretty(p_dat2$`pos (Mb)`, n = 20)) +
+    ggh4x::facet_grid2(. ~ chr, scales = "free_x", space = "free_x") +
+    theme_classic() +
+    theme(panel.grid.major = element_line(),
+          panel.grid.minor.x = element_line(),
+          strip.background = element_rect(color = "grey", fill = NA,
+                                          linewidth = 0, linetype = "solid")) +
+    # rotate x axis text using guides
+    guides(x = guide_axis(angle = -90))
+}
+```
+
+The longest 1p LOH event is observed in cells `plate3_wellA2`, affecting the
+entire 1p arm, and is therefore expected to be homozygous for all SNPs. We can
+therefore phase all SNPs in PD63118 chr1p. Then, I will look for genic SNPs, as 
+these will be most likely to be picked up in the snRNAseq.
+
+We get the cell IDs with 1p LOH.
+
+```{r load_metadata}
+loh_cell_ids <-
+  "data/resolveome/manual_inspection/PD63118.tsv" %>%
+  readr::read_tsv() %>%
+  filter((!chr_dropout | is.na(chr_dropout)) &
+         (!suspected_doublet | is.na(suspected_doublet)) &
+         loh_1p) %>%
+  pull(cell_id)
+```
+
+First, we get all SNPs on 1p in the LOH cells.
+
+```{r load_plate3_wellA2_snps, eval = F}
+loh_snps <-
+  "out/resolveome/nf-resolveome/dna/PD63118/genotyping/snps/PD63118_genotyped_snps.tsv" %>%
+  readr::read_tsv() %>%
+  mutate(cell_id = gsub("_dna.*", "", id)) %>%
+  filter(cell_id %in% loh_cell_ids, chr == 1) %>%
+  split(.$id)
+
+# save
+saveRDS(loh_snps, file.path(cache_path, "loh_genotyped_chr1_snps.rds"))
+```
+
+```{r reload_snps}
+loh_snps <- readRDS(file.path(cache_path, "loh_genotyped_chr1_snps.rds"))
+```
+
+Next, we phase the SNPs on 1p in `plate3_wellA2`.
+
+```{r phase_plate3_wellA2_snps}
+plate3_wellA2 <-
+  loh_snps$plate3_wellA2_dna_run49882 %>%
+  filter(pos < 121500000, total_depth > 4) %>%
+  # assign haplotypes
+  mutate(hap_A_type = case_when(mut_vaf > 0.9 ~ "alt",
+                                mut_vaf < 0.1 ~ "ref"),
+         hap_A_vaf = case_when(mut_vaf > 0.9 ~ mut_vaf,
+                               mut_vaf < 0.1 ~ 1 - mut_vaf),
+         hap_B_type = case_when(mut_vaf > 0.9 ~ "ref",
+                                  mut_vaf < 0.1 ~ "alt"),
+         hap_B_vaf = case_when(mut_vaf > 0.9 ~ 1 - mut_vaf,
+                               mut_vaf < 0.1 ~ mut_vaf)) %>%
+  right_join(loh_snps$plate3_wellA2_dna_run49882)
+```
+
+Now, we visualise the phased SNPs for `plate3_wellA2` in a BAF plot.
+
+```{r plot_baf_plate3_wellA2_snps, fig.width = 25, fig.height = 5}
+plot_baf(plate3_wellA2)
+```
+
+## Phased BAF plots
+
+Now we plot this phasing in all other LOH cell.
+
+```{r plot_bafs, fig.width = 25, fig.height = 5}
+# phase snps
+phased_loh_snps <-
+  purrr::map(loh_snps, function(loh_snps_i) {
+    loh_snps_i %>%
+      left_join(
+        plate3_wellA2 %>%
+          distinct(chr, pos, ref, alt, hap_A_type, hap_B_type) %>%
+          filter(!is.na(hap_A_type))) %>%
+      mutate(hap_A_vaf = case_when(hap_A_type == "alt" ~ mut_vaf,
+                                   hap_A_type == "ref" ~ 1 - mut_vaf),
+             hap_B_vaf = case_when(hap_B_type == "alt" ~ mut_vaf,
+                                   hap_B_type == "ref" ~ 1 - mut_vaf))
+  })
+
+# save phased snps
+saveRDS(phased_loh_snps, file.path(cache_path, "phased_loh_genotyped_chr1_snps.rds"))
+
+# save phased baf plots
+purrr::walk2(names(phased_loh_snps), phased_loh_snps, function(id_i, i) {
+  p <- plot_baf(i) + ggtitle(id_i)
+  print(p)
+})
+```
+
+## Breakpoints
+
+Next, we attempt to identify the breakpoints in each case.
+
+```{r id_breakpoints, fig.height = 10, fig.width = 25}
+# define whether you care about 1 or -1 (based on hap A or B present)
+# find the first position at which the rolling average delta is > -0.9 or < 0.9
+# take the snp one before that
+# plot a red dotted line and record the position of the breakpoint
+breakpoints_and_haps <- list()
+purrr::walk2(names(phased_loh_snps), phased_loh_snps, function(id_i, i) {
+
+  print(id_i)
+
+  # which haplotype is present based on the first 100 phased snps?
+  present_hap <-
+    i %>%
+    filter(!is.na(hap_A_vaf)) %>%
+    head(100) %>%
+    summarise(A = mean(hap_A_vaf),
+              B = mean(hap_B_vaf)) %>%
+    tidyr::pivot_longer(cols = everything()) %>%
+    filter(value == max(value)) %>%
+    pull(name)
+
+  # get rolling average vaf delta of phased snps only
+  p_dat <-
+    i %>%
+    # only look at phased snps with high coverage
+    filter(!is.na(hap_A_vaf), total_depth >= 10) %>%
+    # get rolling average vaf delta
+    arrange(pos) %>%
+    mutate(`pos (Mb)` = pos / 1e6,
+           vaf_delta = case_when(present_hap == "A" ~ hap_A_vaf - hap_B_vaf,
+                                 present_hap == "B" ~ hap_B_vaf - hap_A_vaf),
+           rolling_median_vaf_delta = slide_dbl(vaf_delta, median,
+                                                .before = 100, .after = 100),
+           n = row_number())
+
+  # get breakpoint
+  breakpoint_n <-
+    p_dat %>%
+    filter(rolling_median_vaf_delta < 0.9) %>%
+    head(1) %>%
+    # get the previous snp
+    {.$n - 1}
+  if (length(breakpoint_n) == 0) {
+    breakpoint_n <- nrow(p_dat)
+  }
+  breakpoint <- p_dat %>% filter(n == breakpoint_n) %>% pull(pos)
+
+  # plot
+  p1 <- plot_baf(i) + ggtitle(id_i)
+  p2 <-
+    p_dat %>%
+    ggplot(aes(x = `pos (Mb)`, y = rolling_median_vaf_delta)) +
+    geom_line() +
+    geom_vline(xintercept = breakpoint / 1e6, colour = "red",
+               linetype = "dashed") +
+    # make y limits 0 and 1
+    scale_y_continuous(limits = c(-1, 1)) +
+    scale_x_continuous(limits = c(min(i$pos / 1e6), max(i$pos / 1e6)),
+                       expand = c(0, 0)) +
+    ggtitle(paste0("breakpoint = ", breakpoint))
+  p <- p1 / p2
+  print(p)
+
+  # save breakpoint and present haplotype
+  breakpoints_and_haps[[id_i]] <<-
+    tibble::tibble(breakpoint = breakpoint, present_haplotype = present_hap)
+
+})
+```
+
+Now, we plot the breakpoints for each cell.
+
+```{r plot_breakpoints, fig.height = 8}
+# convert breakpoints to tibble
+breakpoints_and_haps <-
+  bind_rows(breakpoints_and_haps, .id = "id")
+
+# load the established clades
+clades <-
+  "data/resolveome/shared_clades/shared_clades.tsv" %>%
+  readr::read_tsv()
+
+# plot breakpoints
+breakpoints_and_haps %>%
+  mutate(cell_id = gsub("_dna.*", "", id)) %>%
+  left_join(clades) %>%
+  ggplot(aes(x = reorder(cell_id, -breakpoint), y = breakpoint / 1e6,
+             fill = clade)) +
+  geom_col() +
+  geom_text(aes(label = present_haplotype), nudge_y = 1.5) +
+  geom_hline(yintercept = 2487078 / 1e6, colour = "green") +
+  theme_classic() +
+  labs(x = "", y = "chr1p breakpoint (Mb)") +
+  guides(x = guide_axis(angle = -90))
+
+# save breakpoints
+breakpoints %>%
+  readr::write_tsv(file.path(cache_path, "breakpoints.tsv"))
+```

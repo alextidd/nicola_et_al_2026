@@ -1,0 +1,8 @@
+files:
+  - name: hashimoto_exome_targeted_combined_muts.tsv
+    from: Andrew Lawson
+    via: Slack
+    date: 2025-05-09
+    notes: |
+      This includes all of the mutation calls that we've identified from exome
+      and targeted NanoSeq for all of the Hashimoto and Graves samples.

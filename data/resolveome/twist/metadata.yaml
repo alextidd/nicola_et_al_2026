@@ -1,0 +1,7 @@
+- files:
+  - name: Probes_merged_ok_combined_Sanger_Immune-v1_TE-91661256_hg19_gene_info.csv
+    from: Pantelis Nicola
+    via: Slack
+    date: 2025-02-24
+  - name: Sanger_Immune-v1_TE-91661256_hg19_reformatted_220.bed
+    notes: "module load labProjectAdmin; get_baitset.pl -i 220"
