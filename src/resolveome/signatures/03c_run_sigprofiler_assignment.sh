@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# modules
-module load sigprofiler/extractor-1.1.24-GRCh38-GRCh37
-
 # all signatures (cosmic + custom)
 python3 bin/run_Sigprofiler_Assignment.py \
   --samples out/resolveome/signatures/matrices/trinuc_mut_mat_sigpro.txt \

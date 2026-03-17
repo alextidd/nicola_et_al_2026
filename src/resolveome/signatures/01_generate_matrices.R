@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # libraries
 library(magrittr)
 

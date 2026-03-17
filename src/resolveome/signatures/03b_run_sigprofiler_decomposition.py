@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-# module purge ; module load python-3.12.0/perl-5.38.0
-# source ~/envs/sigprofiler_v1.1.3/bin/activate
 
 # packages
 from SigProfilerAssignment import Analyzer as Analyze

@@ -1,4 +1,4 @@
-# runsub src/resolveome/signatures/02a_run_hdp.R -R -M 10000
+#!/usr/bin/env Rscript
 
 # libraries
 library(magrittr)

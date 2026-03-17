@@ -7,9 +7,6 @@ donor_id=$1
 # dirs
 wd=$(pwd)
 
-# modules
-module load singularity
-
 # sentieon license
 export SENTIEON_LICENSE=$wd/../nextflow/external/basejumper/bj-dna-qc/sentieon_eval.lic
 export LSB_EXCLUSIVE=Y

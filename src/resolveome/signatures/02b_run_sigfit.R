@@ -1,4 +1,4 @@
-# runsub src/resolveome/signatures/02b_run_sigfit.R -R -M 40000
+#!/usr/bin/env Rscript
 
 # libraries
 library(sigfit)

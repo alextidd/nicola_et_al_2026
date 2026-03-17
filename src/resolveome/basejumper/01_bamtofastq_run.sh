@@ -1,9 +1,5 @@
 
 #!/bin/bash
-# runsub src/resolveome/basejumper/01_bamtofastq_run.sh
-
-# modules
-module load singularity/3.11.4
 
 # dirs
 wd=$(pwd)

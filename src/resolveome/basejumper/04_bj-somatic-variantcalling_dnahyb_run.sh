@@ -12,9 +12,6 @@ donor_id=$1
 wd=$(pwd)
 run_dir=$wd/out/resolveome/basejumper/bj-somatic-variantcalling/dnahyb/$donor_id/
 
-# modules
-module load singularityce-4.1.0/python-3.11.6
-
 # sentieon license
 export SENTIEON_LICENSE=$wd/../nextflow/external/basejumper/bj-somatic-variantcalling/sentieon_eval.lic
 export LSB_EXCLUSIVE=Y

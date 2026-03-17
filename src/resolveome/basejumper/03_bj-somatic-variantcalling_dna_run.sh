@@ -7,9 +7,6 @@ donor_id=$1
 # dirs
 wd=$(pwd)
 
-# modules
-module load singularityce-4.1.0/python-3.11.6
-
 # sentieon license
 export SENTIEON_LICENSE=$wd/../nextflow/external/basejumper/bj-somatic-variantcalling/sentieon_eval.lic
 export LSB_EXCLUSIVE=Y

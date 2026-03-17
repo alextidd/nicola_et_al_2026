@@ -1,8 +1,4 @@
 #!/bin/bash
-# runsub src/resolveome/signatures/02a_sigprofiler_extractor.sh -M 10000
-
-# modules
-module load sigprofiler/extractor-1.1.24-GRCh38-GRCh37
 
 # dirs
 out_dir=out/resolveome/signatures/
