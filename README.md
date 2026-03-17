@@ -33,16 +33,64 @@ analysis with `Sequoia`, and signature analysis with `HDP`, `sigfit` and
 
 ## Requirements
 
-List software, languages, and key packages needed.
+### Languages
 
-R, Python, Nextflow
-mpboot
+The scripts in this repository use R, Python and Nextflow.
 
-- **R** >= 4.x.x
-  - `tidyverse`, `ggplot2`, `patchwork`, `<other packages>`
-- **Python** >= 3.x (if applicable)
-  - `pandas`, `numpy`, `<other packages>`
-- **Other tools:** `samtools >= 1.x`, `bedtools >= 2.x`, etc.
+Singularity v3.11.6 was used to run the BaseJumper Nextflow pipelines. The 
+BaseJumper pipelines additionally require a Sentieon license in order to run 
+DNAscope.
+
+[MPBoot](https://github.com/diepthihoang/mpboot) must be downloaded in order to
+run [Sequoia](https://github.com/TimCoorens/Sequoia) within the
+`01_run_sequoia.R` script. Once the MPBoot binary has been downloaded, edit this
+script to add the correct `--mpboot_path` parameter.
+
+### Nextflow pipelines
+
+- [bamtofastq](https://github.com/nf-core/bamtofastq)
+- [nf-resolveome](https://github.com/alextidd/nf-resolveome)
+- [bj-dna-qc](https://github.com/alextidd/bj-dna-qc)
+- [bj-somatic-variantcalling](https://github.com/alextidd/bj-somatic-variantcalling)
+
+### Python packages
+
+- SigProfilerExtractor
+- SigProfilerMatrixGenerator
+- SigProfilerAssignment
+- pandas
+- argparse
+
+### R packages
+
+- magrittr
+- tidyverse
+- data.table
+- ape
+- patchwork
+- RColorBrewer
+- lsa
+- slider
+- ggh4x
+- janitor
+- knitr
+- seqinr
+- VGAM
+- MASS
+- devtools
+- optparse
+- hdp
+- sigfit
+- GenomicRanges
+- rtracklayer
+- biomaRt
+- Rsamtools
+- ggtree
+- BiocManager
+- treemut
+
+Some scripts also use helper functions from the R package `alexr`. You can 
+install this by running `devtools::install_github("alextidd/alexr")`.
 
 ---
 
@@ -50,13 +98,42 @@ mpboot
 
 ### External data (must be downloaded)
 
-hg19ToHg38.over.chain.gz
+The following datasets are not included in this repository and must be downloaded separately before running any analysis.
+
+data/reference/liftover/hg19ToHg38.over.chain.gz
 http://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/hg19ToHg38.over.chain.gz
 
-SNP_GRCh37.wgns.bed.gz
+data/reference/nanoseq/SNP_GRCh37.wgns.bed.gz
 https://drive.google.com/drive/folders/1wqkgpRTuf4EUhqCGSLA4fIg9qEEw3ZcL
 
-The following datasets are not included in this repository and must be downloaded separately before running any analysis.
+data/reference/cosmic/COSMIC_v3.5_SBS_GRCh38.txt
+https://cancer.sanger.ac.uk/signatures/downloads/
+
+data/reference/COSMIC_v3.4_SBS_GRCh38.txt
+https://cancer.sanger.ac.uk/signatures/downloads/
+
+data/reference/COSMIC_v2_SBS_GRCh38.txt
+https://cancer.sanger.ac.uk/signatures/downloads/
+
+data/signatures/machado_2022/S8_finalsignaturetable.tsv
+- upload to github
+
+data/resolveome/shared_clades/shared_clades.tsv
+- upload to github
+
+data/signatures/petljak_2019/mmc1.tsv
+- upload to github
+
+data/signatures/lodato_2018/Lodato2018_SignatureData_Aging.csv
+- upload to github
+
+data/signatures/luquette_2022/snv.artifact.signature.v3.rda
+- upload to github
+
+data/resolveome/manual_inspection/20250902_pta_additional_annotation_H1.tsv
+data/resolveome/manual_inspection/H1_PD63118_pta_additional_annotation.tsv
+- upload to github
+  
 
 | Dataset | Source | Version / Build | Download link | Destination path |
 |---------|--------|----------------|--------------|-----------------|
