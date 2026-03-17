@@ -6,9 +6,9 @@ library(purrr)
 library(dplyr)
 
 # dirs
-data_dir <- file.path(Sys.getenv("LUSTRE_125"), "projects/hashimoto_thyroiditis/data/")
+data_dir <- "data/"
 fastq_dir <- file.path(data_dir, "/fastqs/reads")
-out_dir <- file.path(Sys.getenv("LUSTRE_125"), "projects/hashimoto_thyroiditis/out/resolveome/basejumper")
+out_dir <- "out/resolveome/basejumper"
 dir.create(fastq_dir, recursive = TRUE, showWarnings = FALSE)
 
 # read samplesheet

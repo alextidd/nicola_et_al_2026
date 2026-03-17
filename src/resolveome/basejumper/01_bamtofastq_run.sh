@@ -5,14 +5,17 @@
 # modules
 module load singularity/3.11.4
 
+# dirs
+wd=$(pwd)
+
 # run
 (
-  cd $LUSTRE_125/projects/hashimoto_thyroiditis/data/fastqs/
+  cd data/fastqs/
   nextflow run nf-core/bamtofastq \
     -profile singularity,sanger \
     --input samplesheet.csv \
     --outdir . \
-    -w $LUSTRE_125/projects/hashimoto_thyroiditis/work/bamtofastq/ \
+    -w $wd/work/bamtofastq/ \
     -resume \
     -N at31@sanger.ac.uk
 )

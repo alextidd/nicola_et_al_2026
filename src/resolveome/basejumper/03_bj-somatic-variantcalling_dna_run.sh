@@ -6,7 +6,6 @@ donor_id=$1
 
 # dirs
 wd=$(pwd)
-lustre_dir=$LUSTRE_125/projects/hashimoto_thyroiditis/
 
 # modules
 module load singularityce-4.1.0/python-3.11.6
@@ -17,7 +16,7 @@ export LSB_EXCLUSIVE=Y
 
 # run
 (
-  cd $lustre_dir/out/resolveome/basejumper/bj-somatic-variantcalling/dna/$donor_id/
+  cd out/resolveome/basejumper/bj-somatic-variantcalling/dna/$donor_id/
   nextflow run $NFS_TEAM/nextflow/external/basejumper/bj-somatic-variantcalling \
     --input_csv samplesheet.csv \
     --publish_dir $donor_id \
@@ -28,7 +27,7 @@ export LSB_EXCLUSIVE=Y
     --skip_sigprofile false \
     -c $wd/config/bj-somatic-variantcalling.config \
     -c $wd/config/basejumper.config \
-    -w $lustre_dir/work/basejumper/bj-somatic-variantcalling/dna/$donor_id/ \
+    -w $wd/work/basejumper/bj-somatic-variantcalling/dna/$donor_id/ \
     -profile singularity \
     --architecture "x86_64" \
     -N at31@sanger.ac.uk \

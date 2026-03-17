@@ -6,9 +6,7 @@ library(dplyr)
 library(tibble)
 
 # dirs
-bj_dir <-
-  file.path(Sys.getenv("LUSTRE_125"), "projects/hashimoto_thyroiditis",
-            "out/resolveome/basejumper/bj-somatic-variantcalling/dna/PD63118/")
+bj_dir <- "out/resolveome/basejumper/bj-somatic-variantcalling/dna/PD63118/"
 seq_dir <- "out/resolveome/sequoia/"
 dir.create(seq_dir, recursive = TRUE, showWarnings = FALSE)
 
@@ -51,17 +49,17 @@ snps <-
   readr::read_tsv() %>%
   dplyr::mutate(chr = paste0("chr", chr)) %>%
   alexr::lift_over(
-    lift_over_chain = "../../reference/liftover/hg19ToHg38.over.chain") %>%
+    lift_over_chain = "data/reference/liftover/hg19ToHg38.over.chain") %>%
   dplyr::mutate(mut_id = paste(chr, pos, ref, alt, sep = "_"))
 
 # load and lift over common snps
 common_snps <-
-  "../../reference/nanoseq/genome_masks/GRCh37_WGNS/SNP_GRCh37.wgns.bed.gz" %>%
+  "data/reference/nanoseq/SNP_GRCh37.wgns.bed.gz" %>%
   gzfile() %>%
   readr::read_tsv(col_names = c("#CHROM", "START", "POS")) %>%
   dplyr::transmute(chr = paste0("chr", `#CHROM`), pos = POS) %>%
   alexr::lift_over(
-    lift_over_chain = "../../reference/liftover/hg19ToHg38.over.chain") %>%
+    lift_over_chain = "data/reference/liftover/hg19ToHg38.over.chain") %>%
   dplyr::mutate(mut_id = paste(chr, pos, sep = "_"))
 
 # mask sites

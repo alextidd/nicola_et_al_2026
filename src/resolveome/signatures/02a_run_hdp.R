@@ -275,7 +275,7 @@ refs <-
   c("v2", "v3.5") %>%
   purrr::set_names() %>%
   purrr::map(function(v) {
-    readr::read_tsv(paste0("../../reference/cosmic/COSMIC_", v, "_SBS_GRCh38.txt")) %>%
+    readr::read_tsv(paste0("data/reference/cosmic/COSMIC_", v, "_SBS_GRCh38.txt")) %>%
       dplyr::mutate(Type = factor(Type, levels = full_vec)) %>%
       dplyr::arrange(Type) %>%
       tibble::column_to_rownames("Type") %>%

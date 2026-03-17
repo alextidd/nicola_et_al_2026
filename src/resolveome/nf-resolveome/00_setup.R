@@ -5,7 +5,7 @@ library(magrittr)
 
 # dirs
 wd <- getwd()
-data_dir <- file.path(Sys.getenv("LUSTRE_125"), "projects/hashimoto_thyroiditis/data/bams/")
+data_dir <- "data/bams/"
 out_dir <- file.path(wd, "out/resolveome/nf-resolveome/muts_and_snps/")
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
@@ -16,7 +16,7 @@ ss_bams <-
 
 # get common snp sites
 common_snps <-
-  "../../reference/nanoseq/genome_masks/GRCh37_WGNS/SNP_GRCh37.wgns.bed.gz" %>%
+  "data/reference/nanoseq/SNP_GRCh37.wgns.bed.gz" %>%
   gzfile() %>%
   readr::read_tsv(col_names = c("#CHROM", "START", "POS")) %>%
   dplyr::select(`#CHROM`, POS)

@@ -23,7 +23,7 @@ dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
 # read cosmic refs for trinuc order
 trinuc_order <-
-  paste0("../../reference/cosmic/COSMIC_v3.4_SBS_GRCh38.txt") %>%
+  paste0("data/reference/cosmic/COSMIC_v3.4_SBS_GRCh38.txt") %>%
   readr::read_tsv() %>%
   dplyr::pull(Type)
 
@@ -38,7 +38,7 @@ muts_per_branch <-
 trinuc_mut_mat <-
   muts_per_branch %>%
   alexr::muts_to_96_contexts(
-    fasta = "../../reference/gatk/GRCh38/Homo_sapiens_assembly38.fasta.gz")
+    fasta = "data/reference/gatk/GRCh38/Homo_sapiens_assembly38.fasta.gz")
 
 # save hdp format
 trinuc_mut_mat %>%
@@ -51,12 +51,3 @@ trinuc_mut_mat %>%
   dplyr::mutate(Type = hdp_to_sigpro(Type) %>% factor(levels = trinuc_order)) %>%
   dplyr::arrange(Type) %>%
   readr::write_tsv(file.path(out_dir, "trinuc_mut_mat_sigpro.txt"))
-
-# # get machado colonies
-# machado_md <-
-#   "/nfs/casm/team268im/at31/projects/hashimoto_thyroiditis/data/signatures/machado_2022/colonyinfo_AX001_KX001_KX002_KX003_TX001_TX002_CB001.txt" %>%
-#   readr::read_tsv() %>%
-#   janitor::clean_names()
-# machado_calls <-
-#   "data/signatures/machado_2022/mutcounts_matrix_pcawg_mm_lymph_hsc_sigprofilerOrder.txt" %>%
-#   readr::read_tsv()

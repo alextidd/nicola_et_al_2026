@@ -10,8 +10,7 @@ donor_id=$1
 
 # dirs
 wd=$(pwd)
-lustre_dir=$LUSTRE_125/projects/hashimoto_thyroiditis/
-run_dir=$lustre_dir/out/resolveome/basejumper/bj-somatic-variantcalling/dnahyb/$donor_id/
+run_dir=$wd/out/resolveome/basejumper/bj-somatic-variantcalling/dnahyb/$donor_id/
 
 # modules
 module load singularityce-4.1.0/python-3.11.6
@@ -34,7 +33,7 @@ export LSB_EXCLUSIVE=Y
     -c $wd/config/bj-somatic-variantcalling_dnahyb.config \
     -c $wd/config/bj-somatic-variantcalling.config \
     -c $wd/config/basejumper.config \
-    -w $lustre_dir/work/basejumper/bj-somatic-variantcalling/dnahyb/$donor_id/ \
+    -w $wd/work/basejumper/bj-somatic-variantcalling/dnahyb/$donor_id/ \
     -profile singularity \
     --architecture "x86_64" \
     -resume \

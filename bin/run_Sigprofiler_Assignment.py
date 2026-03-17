@@ -104,7 +104,7 @@ def main():
             
             # Try alternate path if not found
             if not os.path.exists(cosmic_path):
-                cosmic_path = f"../../reference/cosmic/COSMIC_v{args.cosmic_version}_SBS_{args.reference_genome}.txt"
+                cosmic_path = f"data/reference/cosmic/COSMIC_v{args.cosmic_version}_SBS_{args.reference_genome}.txt"
             
             if not os.path.exists(cosmic_path):
                 raise FileNotFoundError(f"COSMIC signatures file not found. Tried: {cosmic_path}")

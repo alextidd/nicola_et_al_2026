@@ -15,7 +15,7 @@ python3 bin/run_Sigprofiler_Assignment.py \
   --samples out/resolveome/signatures/matrices/trinuc_mut_mat_sigpro.txt \
   --output_dir out/resolveome/signatures/sigprofiler/assignment/cosmic/ \
   --reference_genome GRCh38 \
-  --signatures_file ../../reference/cosmic/COSMIC_v3.4_SBS_GRCh38.txt
+  --signatures_file data/reference/cosmic/COSMIC_v3.4_SBS_GRCh38.txt
 
 # consensus signatures (cosmic only)
 python3 bin/run_Sigprofiler_Assignment.py \

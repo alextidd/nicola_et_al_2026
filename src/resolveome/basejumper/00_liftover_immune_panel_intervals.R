@@ -32,7 +32,7 @@ hg38_intervals <-
     seqnames = paste0("chr", .$chr),
     ranges = IRanges(start = .$bed_start, end = .$bed_end),
     gene = .$gene, target_type = .$target_type)} %>%
-  liftOver(import.chain("../../reference/liftover/hg19ToHg38.over.chain")) %>%
+  liftOver(import.chain("data/reference/liftover/hg19ToHg38.over.chain")) %>%
   unlist() %>%
   tibble::as_tibble() %>%
   dplyr::select(seqnames, start, end, gene) %>%
@@ -48,7 +48,7 @@ hg38_intervals <-
 # coordinates are 1-based (first position in the genome is position 1, not
 # position 0).
 dict_header <-
-  "/lustre/scratch124/casm/references/pipeline_ref/Homo_sapiens/GRCh38_full_analysis_set_plus_decoy_hla/genome.fa.dict" %>%
+  "data/reference/gatk/GRCh38/genome.fa.dict" %>%
   readr::read_lines()
 
 # save to picard interval_list format
