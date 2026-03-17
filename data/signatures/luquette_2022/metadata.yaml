@@ -1,0 +1,4 @@
+- files:
+  - name: snv.artifact.signature.v3.rda
+    link: https://github.com/parklab/r-scan2/blob/980f1586334e62e9043941e58ab084649819bd6c/data/snv.artifact.signature.v3.rda
+    date: 2025-11-24

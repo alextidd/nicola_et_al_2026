@@ -1,3 +1,11 @@
 - files:
   - name: PD63118.tsv
     link: https://docs.google.com/spreadsheets/d/1XtZ1B8GBUH1zuUcDjfbz9W_ZlyxF2mKohZgn3cm_ILo/edit?gid=0#gid=0
+  - name: 20250902_pta_additional_annotation_H1.tsv
+    from: Andrew Lawson
+    via: Slack
+    date: 2025-09-02
+  - name: H1_PD63118_pta_additional_annotation.tsv
+    from: Andrew Lawson
+    via: Slack
+    date: 2026-01-29

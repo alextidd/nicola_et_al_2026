@@ -1,9 +1,3 @@
-
-genome.fa
-
-mpboot
-
-
 # Polyclonal selection of immune checkpoint mutations in thyroid autoimmunity
 
 > **Paper:** Polyclonal selection of immune checkpoint mutations in thyroid autoimmunity
@@ -100,56 +94,13 @@ install this by running `devtools::install_github("alextidd/alexr")`.
 
 The following datasets are not included in this repository and must be downloaded separately before running any analysis.
 
-data/reference/liftover/hg19ToHg38.over.chain.gz
-http://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/hg19ToHg38.over.chain.gz
-
-data/reference/nanoseq/SNP_GRCh37.wgns.bed.gz
-https://drive.google.com/drive/folders/1wqkgpRTuf4EUhqCGSLA4fIg9qEEw3ZcL
-
-data/reference/cosmic/COSMIC_v3.5_SBS_GRCh38.txt
-https://cancer.sanger.ac.uk/signatures/downloads/
-
-data/reference/COSMIC_v3.4_SBS_GRCh38.txt
-https://cancer.sanger.ac.uk/signatures/downloads/
-
-data/reference/COSMIC_v2_SBS_GRCh38.txt
-https://cancer.sanger.ac.uk/signatures/downloads/
-
-data/signatures/machado_2022/S8_finalsignaturetable.tsv
-- upload to github
-
-data/resolveome/shared_clades/shared_clades.tsv
-- upload to github
-
-data/signatures/petljak_2019/mmc1.tsv
-- upload to github
-
-data/signatures/lodato_2018/Lodato2018_SignatureData_Aging.csv
-- upload to github
-
-data/signatures/luquette_2022/snv.artifact.signature.v3.rda
-- upload to github
-
-data/resolveome/manual_inspection/20250902_pta_additional_annotation_H1.tsv
-data/resolveome/manual_inspection/H1_PD63118_pta_additional_annotation.tsv
-- upload to github
-  
-
-| Dataset | Source | Version / Build | Download link | Destination path |
-|---------|--------|----------------|--------------|-----------------|
-| Dataset A | Source name | vX.X | [Link](https://example.com) | `data/raw/dataset_a/` |
-| Reference genome | Ensembl | GRCh38.XX | [Link](https://example.com) | `data/reference/` |
-| Dataset B | Source name | — | [Link](https://example.com) | `data/raw/dataset_b/` |
-
-After downloading, run the setup script to verify file integrity:
-
-```bash
-bash scripts/check_data.sh
-```
-
-### Processed / intermediate data
-
-Processed data files that are too large to host on GitHub but are required to run downstream steps can be downloaded from [Zenodo (DOI: 10.5281/zenodo.XXXXXXX)](https://zenodo.org). Place them in `data/processed/` before proceeding.
+| file | download link |
+| --- | --- |
+| data/reference/liftover/hg19ToHg38.over.chain.gz | http://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/hg19ToHg38.over.chain.gz |
+| data/reference/nanoseq/SNP_GRCh37.wgns.bed.gz | https://drive.google.com/drive/folders/1wqkgpRTuf4EUhqCGSLA4fIg9qEEw3ZcL |
+| data/reference/cosmic/COSMIC_v3.5_SBS_GRCh38.txt | https://cancer.sanger.ac.uk/signatures/downloads/ |
+| data/reference/COSMIC_v3.4_SBS_GRCh38.txt | https://cancer.sanger.ac.uk/signatures/downloads/ |
+| data/reference/COSMIC_v2_SBS_GRCh38.txt | https://cancer.sanger.ac.uk/signatures/downloads/ |
 
 ---
 
@@ -157,6 +108,7 @@ Processed data files that are too large to host on GitHub but are required to ru
 
 ```
 .
+├── README.md
 ├── bin
 │   ├── build_phylogeny.R
 │   ├── run_Sigprofiler_Assignment.py
@@ -170,18 +122,37 @@ Processed data files that are too large to host on GitHub but are required to ru
 │   ├── nanoseq
 │   │   ├── hashimoto_exome_targeted_combined_muts.tsv
 │   │   └── metadata.yaml
-│   └── resolveome
-│       ├── manual_inspection
-│       │   ├── metadata.yaml
-│       │   └── PD63118.tsv
-│       ├── twist
-│       │   ├── metadata.yaml
-│       │   ├── Probes_merged_ok_combined_Sanger_Immune-v1_TE-91661256_hg19_gene_info.csv
-│       │   └── Sanger_Immune-v1_TE-91661256_hg19_reformatted_220.bed
-│       └── vdj_coverage
-│           ├── ig_tcr_genes_pseudogenes.tsv
-│           └── metadata.yaml
-├── README.md
+│   ├── resolveome
+│   │   ├── manual_inspection
+│   │   │   ├── 20250902_pta_additional_annotation_H1.tsv
+│   │   │   ├── H1_PD63118_pta_additional_annotation.tsv
+│   │   │   ├── metadata.yaml
+│   │   │   └── PD63118.tsv
+│   │   └── shared_clades
+│   │       ├── metadata.yaml
+│   │       ├── shared_clades.tsv
+│   │       └── shared_clades.txt
+│   ├── signatures
+│   │   ├── lodato_2018
+│   │   │   ├── Lodato2018_SignatureData_Aging.csv
+│   │   │   └── metadata.yaml
+│   │   ├── luquette_2022
+│   │   │   ├── metadata.yaml
+│   │   │   └── snv.artifact.signature.v3.rda
+│   │   ├── machado_2022
+│   │   │   ├── 41586_2022_5072_MOESM4_ESM.xlsx
+│   │   │   ├── metadata.yaml
+│   │   │   └── S8_finalsignaturetable.tsv
+│   │   └── petljak_2019
+│   │       ├── metadata.yaml
+│   │       └── mmc1.tsv
+│   ├── twist
+│   │   ├── metadata.yaml
+│   │   ├── Probes_merged_ok_combined_Sanger_Immune-v1_TE-91661256_hg19_gene_info.csv
+│   │   └── Sanger_Immune-v1_TE-91661256_hg19_reformatted_220.bed
+│   └── vdj_coverage
+│       ├── ig_tcr_genes_pseudogenes.tsv
+│       └── metadata.yaml
 └── src
     └── resolveome
         ├── basejumper

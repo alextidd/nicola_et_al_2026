@@ -1,0 +1,18 @@
+The breakpoints for shared clades are mostly very reassuring:
+Y26D+Y
+plate3_wellD4 = 25,224,321
+plate3_wellE11 = 25,224,412
+plate10_wellH5 = 25,224,412
+plate10_wellA8 = 25,269,870
+E177*
+plate10_wellD2 = 26,272,139
+plate10_wellD3 = 26,215,316
+C57R
+plate10_wellD6 = 32,314,614
+plate3_wellH5 = 32,387,420
+Intron 2 splice acceptor
+plate10_wellC3 = 44,772,626
+plate3_wellF7 = 44,776,240
+Y83D
+plate10_wellG2 = 87,792,681
+plate10_wellG10 = 87,792,681
