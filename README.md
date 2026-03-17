@@ -114,6 +114,7 @@ The following datasets are not included in this repository and must be downloade
 
 ```
 .
+├── README.md
 ├── bin
 │   ├── build_phylogeny.R
 │   ├── run_Sigprofiler_Assignment.py
@@ -162,7 +163,6 @@ The following datasets are not included in this repository and must be downloade
 │   └── vdj_coverage
 │       ├── ig_tcr_genes_pseudogenes.tsv
 │       └── metadata.yaml
-├── README.md
 └── src
     └── resolveome
         ├── basejumper
