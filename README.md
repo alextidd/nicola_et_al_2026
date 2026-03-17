@@ -42,46 +42,46 @@ script to add the correct `--mpboot_path` parameter.
 
 ### Nextflow pipelines
 
-- [bamtofastq](https://github.com/nf-core/bamtofastq)
-- [nf-resolveome](https://github.com/alextidd/nf-resolveome)
-- [bj-dna-qc](https://github.com/alextidd/bj-dna-qc)
-- [bj-somatic-variantcalling](https://github.com/alextidd/bj-somatic-variantcalling)
+- [nf-core/bamtofastq](https://github.com/nf-core/bamtofastq)
+- [alextidd/nf-resolveome](https://github.com/alextidd/nf-resolveome)
+- [alextidd/bj-dna-qc](https://github.com/alextidd/bj-dna-qc)
+- [alextidd/bj-somatic-variantcalling](https://github.com/alextidd/bj-somatic-variantcalling)
 
 ### Python packages
 
-- SigProfilerExtractor
-- SigProfilerMatrixGenerator
-- SigProfilerAssignment
-- pandas
-- argparse
+- `SigProfilerExtractor`
+- `SigProfilerMatrixGenerator`
+- `SigProfilerAssignment`
+- `pandas`
+- `argparse`
 
 ### R packages
 
-- magrittr
-- tidyverse
-- data.table
-- ape
-- patchwork
-- RColorBrewer
-- lsa
-- slider
-- ggh4x
-- janitor
-- knitr
-- seqinr
-- VGAM
-- MASS
-- devtools
-- optparse
-- hdp
-- sigfit
-- GenomicRanges
-- rtracklayer
-- biomaRt
-- Rsamtools
-- ggtree
-- BiocManager
-- treemut
+- `magrittr`
+- `tidyverse`
+- `data.table`
+- `ape`
+- `patchwork`
+- `RColorBrewer`
+- `lsa`
+- `slider`
+- `ggh4x`
+- `janitor`
+- `knitr`
+- `seqinr`
+- `VGAM`
+- `MASS`
+- `devtools`
+- `optparse`
+- `hdp`
+- `sigfit`
+- `GenomicRanges`
+- `rtracklayer`
+- `biomaRt`
+- `Rsamtools`
+- `ggtree`
+- `BiocManager`
+- `treemut`
 
 Some scripts also use helper functions from the R package `alexr`. You can 
 install this by running `devtools::install_github("alextidd/alexr")`.
@@ -99,8 +99,8 @@ The following datasets are not included in this repository and must be downloade
 | data/reference/liftover/hg19ToHg38.over.chain.gz | http://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/hg19ToHg38.over.chain.gz |
 | data/reference/nanoseq/SNP_GRCh37.wgns.bed.gz | https://drive.google.com/drive/folders/1wqkgpRTuf4EUhqCGSLA4fIg9qEEw3ZcL |
 | data/reference/cosmic/COSMIC_v3.5_SBS_GRCh38.txt | https://cancer.sanger.ac.uk/signatures/downloads/ |
-| data/reference/COSMIC_v3.4_SBS_GRCh38.txt | https://cancer.sanger.ac.uk/signatures/downloads/ |
-| data/reference/COSMIC_v2_SBS_GRCh38.txt | https://cancer.sanger.ac.uk/signatures/downloads/ |
+| data/reference/cosmic/COSMIC_v3.4_SBS_GRCh38.txt | https://cancer.sanger.ac.uk/signatures/downloads/ |
+| data/reference/cosmic/COSMIC_v2_SBS_GRCh38.txt | https://cancer.sanger.ac.uk/signatures/downloads/ |
 
 ---
 
