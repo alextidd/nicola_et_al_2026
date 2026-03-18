@@ -37,7 +37,7 @@ hg38_intervals <-
   tibble::as_tibble() %>%
   dplyr::select(seqnames, start, end, gene) %>%
   dplyr::left_join(strandedness, by = "gene") %>%
-  # make missing genes + stranded
+  # make missing genes '+' stranded
   dplyr::mutate(strand = ifelse(is.na(strand), "+", strand)) %>%
   dplyr::transmute(chr = seqnames, start, end, strand, gene)
 

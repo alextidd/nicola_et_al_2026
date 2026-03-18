@@ -12,7 +12,7 @@ out_dir <- "out/resolveome/basejumper"
 dir.create(fastq_dir, recursive = TRUE, showWarnings = FALSE)
 
 # read samplesheet
-ss <- readr::read_csv(file.path(data_dir, "bams/samplesheet_local.csv"))
+ss <- readr::read_csv(file.path(data_dir, "bams/samplesheet.csv"))
 
 # write samplesheet for fastqs
 ss %>%
