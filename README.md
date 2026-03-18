@@ -149,7 +149,7 @@ data/
 │       └── mmc1.tsv
 ├── twist
 │   ├── metadata.yaml
-│   │   ├── Probes_merged_ok_combined_Sanger_Immune-v1_TE-91661256_hg19_gene_info.csv
+│   ├── Probes_merged_ok_combined_Sanger_Immune-v1_TE-91661256_hg19_gene_info.csv
 │   └── Sanger_Immune-v1_TE-91661256_hg19_reformatted_220.bed
 └── vdj_coverage
     ├── ig_tcr_genes_pseudogenes.tsv
