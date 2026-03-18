@@ -16,7 +16,7 @@ analysis with `Sequoia`, and signature analysis with `HDP`, `sigfit` and
 
 ## Table of Contents
 
-- [Requirements](#requirements)
+- [Dependencies](#dependencies)
 - [Data](#data)
 - [Repository structure](#repository-structure)
 - [How to run](#how-to-run)
@@ -87,8 +87,9 @@ Please download these into the `nextflow/` subdirectory.
 - `BiocManager`
 - `treemut`
 
-Some scripts also use helper functions from the R package `alexr`. You can 
-install this by running `devtools::install_github("alextidd/alexr")`.
+Some scripts also use helper functions from the R package
+[alexr](https://github.com/alextidd/alexr). You can install this by running 
+`devtools::install_github("alextidd/alexr")`.
 
 ---
 
@@ -220,7 +221,7 @@ src/resolveome/
 │   ├── 03_bj-somatic-variantcalling_dna_run.sh
 │   └── 04_bj-somatic-variantcalling_dnahyb_run.sh
 │
-│   # 2. somatic variant genotyping
+│   # 2. somatic variant and SNP genotyping
 ├── nf-resolveome                
 │   ├── 00_get_vdj_regions.R
 │   ├── 00_setup.R
