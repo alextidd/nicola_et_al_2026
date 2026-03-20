@@ -44,10 +44,10 @@ script to add the correct `--mpboot_path` parameter.
 
 The analysis depends on the following Nextflow pipelines.
 
-- [nf-core/bamtofastq](https://github.com/nf-core/bamtofastq)
-- [alextidd/nf-resolveome](https://github.com/alextidd/nf-resolveome)
-- [alextidd/bj-dna-qc](https://github.com/alextidd/bj-dna-qc)
-- [alextidd/bj-somatic-variantcalling](https://github.com/alextidd/bj-somatic-variantcalling)
+- [nf-core/bamtofastq](https://github.com/nf-core/bamtofastq) (commit hash: 8698321)
+- [alextidd/nf-resolveome](https://github.com/alextidd/nf-resolveome) (commit hash: a785010)
+- [alextidd/bj-dna-qc](https://github.com/alextidd/bj-dna-qc) (commit hash: 3149537)
+- [alextidd/bj-somatic-variantcalling](https://github.com/alextidd/bj-somatic-variantcalling) (commit hash: ed6a84b)
 
 Please download these into the `nextflow/` subdirectory.
 
@@ -61,31 +61,31 @@ Please download these into the `nextflow/` subdirectory.
 
 ### R packages
 
-- `magrittr`
-- `tidyverse`
-- `data.table`
-- `ape`
-- `patchwork`
-- `RColorBrewer`
-- `lsa`
-- `slider`
-- `ggh4x`
-- `janitor`
-- `knitr`
-- `seqinr`
-- `VGAM`
-- `MASS`
-- `devtools`
-- `optparse`
-- `hdp`
-- `sigfit`
-- `GenomicRanges`
-- `rtracklayer`
-- `biomaRt`
-- `Rsamtools`
-- `ggtree`
-- `BiocManager`
-- `treemut`
+- `magrittr` (v2.0.4)
+- `tidyverse` (v2.0.0)
+- `data.table` (v1.18.2.1)
+- `ape` (v5.8)
+- `patchwork` (v1.2.0)
+- `RColorBrewer` (v1.1-3)
+- `lsa` (v0.73.3)
+- `slider` (v0.3.2)
+- `ggh4x` (v0.2.8)
+- `janitor` (v2.2.0)
+- `knitr` (v1.51)
+- `seqinr` (v4.2-36)
+- `VGAM` (v1.1-12)
+- `MASS` (v7.3-60.2)
+- `devtools` (v2.4.6)
+- `optparse` (v1.7.5)
+- `hdp` (v0.1.5)
+- `sigfit` (v2.2)
+- `GenomicRanges` (v1.56.1)
+- `rtracklayer` (v1.64.0)
+- `biomaRt` (v2.60.1)
+- `Rsamtools` (v2.20.0)
+- `ggtree` (v3.12.0)
+- `BiocManager` (v1.30.26)
+- `treemut` (v1.1)
 
 Some scripts also use helper functions from the R package
 [alexr](https://github.com/alextidd/alexr). You can install this by running 
