@@ -24,74 +24,6 @@ analysis with `Sequoia`, and signature analysis with `HDP`, `sigfit` and
 
 ---
 
-## Dependencies
-
-### Languages
-
-The scripts in this repository use R, Python and Nextflow.
-
-Singularity v3.11.6 was used to run the BaseJumper Nextflow pipelines. The 
-BaseJumper pipelines additionally require a Sentieon license in order to run 
-DNAscope.
-
-[MPBoot](https://github.com/diepthihoang/mpboot) must be downloaded in order to
-run [Sequoia](https://github.com/TimCoorens/Sequoia) within the
-`01_run_sequoia.R` script. Once the MPBoot binary has been downloaded, edit this
-script to add the correct `--mpboot_path` parameter.
-
-### Nextflow pipelines
-
-The analysis depends on the following Nextflow pipelines.
-
-- [nf-core/bamtofastq](https://github.com/nf-core/bamtofastq) (commit hash: 8698321)
-- [alextidd/nf-resolveome](https://github.com/alextidd/nf-resolveome) (commit hash: a785010)
-- [alextidd/bj-dna-qc](https://github.com/alextidd/bj-dna-qc) (commit hash: 3149537)
-- [alextidd/bj-somatic-variantcalling](https://github.com/alextidd/bj-somatic-variantcalling) (commit hash: ed6a84b)
-
-Please download these into the `nextflow/` subdirectory.
-
-### Python packages
-
-- `SigProfilerExtractor`
-- `SigProfilerMatrixGenerator`
-- `SigProfilerAssignment`
-- `pandas`
-- `argparse`
-
-### R packages
-
-- `magrittr` (v2.0.4)
-- `tidyverse` (v2.0.0)
-- `data.table` (v1.18.2.1)
-- `ape` (v5.8)
-- `patchwork` (v1.2.0)
-- `RColorBrewer` (v1.1-3)
-- `lsa` (v0.73.3)
-- `slider` (v0.3.2)
-- `ggh4x` (v0.2.8)
-- `janitor` (v2.2.0)
-- `knitr` (v1.51)
-- `seqinr` (v4.2-36)
-- `VGAM` (v1.1-12)
-- `MASS` (v7.3-60.2)
-- `devtools` (v2.4.6)
-- `optparse` (v1.7.5)
-- `hdp` (v0.1.5)
-- `sigfit` (v2.2)
-- `GenomicRanges` (v1.56.1)
-- `rtracklayer` (v1.64.0)
-- `biomaRt` (v2.60.1)
-- `Rsamtools` (v2.20.0)
-- `ggtree` (v3.12.0)
-- `BiocManager` (v1.30.26)
-- `treemut` (v1.1)
-
-Some scripts also use helper functions from the R package
-[alexr](https://github.com/alextidd/alexr). You can install this by running 
-`devtools::install_github("alextidd/alexr")`.
-
----
-
 ## Data
 
 ### External data (must be downloaded)
@@ -104,8 +36,6 @@ downloaded separately before running any analysis.
 | data/reference/liftover/hg19ToHg38.over.chain.gz | http://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/hg19ToHg38.over.chain.gz |
 | data/reference/nanoseq/SNP_GRCh37.wgns.bed.gz | https://drive.google.com/drive/folders/1wqkgpRTuf4EUhqCGSLA4fIg9qEEw3ZcL |
 | data/reference/cosmic/COSMIC_v3.5_SBS_GRCh38.txt | https://cancer.sanger.ac.uk/signatures/downloads/ |
-| data/reference/cosmic/COSMIC_v3.4_SBS_GRCh38.txt | https://cancer.sanger.ac.uk/signatures/downloads/ |
-| data/reference/cosmic/COSMIC_v2_SBS_GRCh38.txt | https://cancer.sanger.ac.uk/signatures/downloads/ |
 | data/reference/gatk/GRCh38/Homo_sapiens_assembly38.fasta.gz | ftp://gsapubftp-anonymous:@ftp.broadinstitute.org/ |
 | data/reference/1kgp/GRCh37/hs37d5.fa | https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/ |
 
@@ -183,6 +113,63 @@ data/caveman/
 
 ---
 
+## Dependencies
+
+### Languages
+
+The scripts in this repository use R, Python and Nextflow.
+
+Singularity v3.11.6 was used to run the BaseJumper Nextflow pipelines. The 
+BaseJumper pipelines additionally require a Sentieon license in order to run 
+DNAscope.
+
+[MPBoot](https://github.com/diepthihoang/mpboot) must be downloaded in order to
+run [Sequoia](https://github.com/TimCoorens/Sequoia) within the
+`01_run_sequoia.R` script. Once the MPBoot binary has been downloaded, edit this
+script to add the correct `--mpboot_path` parameter.
+
+### Python packages
+
+- `SigProfilerExtractor`
+- `SigProfilerMatrixGenerator`
+- `SigProfilerAssignment`
+- `pandas`
+- `argparse`
+
+### R packages
+
+- `magrittr` (v2.0.4)
+- `tidyverse` (v2.0.0)
+- `data.table` (v1.18.2.1)
+- `ape` (v5.8)
+- `patchwork` (v1.2.0)
+- `RColorBrewer` (v1.1-3)
+- `lsa` (v0.73.3)
+- `slider` (v0.3.2)
+- `ggh4x` (v0.2.8)
+- `janitor` (v2.2.0)
+- `knitr` (v1.51)
+- `seqinr` (v4.2-36)
+- `VGAM` (v1.1-12)
+- `MASS` (v7.3-60.2)
+- `devtools` (v2.4.6)
+- `optparse` (v1.7.5)
+- `hdp` (v0.1.5)
+- `sigfit` (v2.2)
+- `GenomicRanges` (v1.56.1)
+- `rtracklayer` (v1.64.0)
+- `biomaRt` (v2.60.1)
+- `Rsamtools` (v2.20.0)
+- `ggtree` (v3.12.0)
+- `BiocManager` (v1.30.26)
+- `treemut` (v1.1)
+
+Some scripts also use helper functions from the R package
+[alexr](https://github.com/alextidd/alexr). You can install this by running 
+`devtools::install_github("alextidd/alexr")`.
+
+---
+
 ## How to run
 
 Clone the repository.
@@ -196,6 +183,28 @@ Install all dependencies described in the [Dependencies](#dependencies) section
 above. 
 
 Download all data listed in the [Data](#data) section above.
+
+### Nextflow pipelines
+
+The analysis depends on the following Nextflow pipelines.
+
+- [nf-core/bamtofastq](https://github.com/nf-core/bamtofastq) (commit hash: 8698321)
+- [alextidd/nf-resolveome](https://github.com/alextidd/nf-resolveome) (commit hash: a785010)
+- [alextidd/bj-dna-qc](https://github.com/alextidd/bj-dna-qc) (commit hash: 3149537)
+- [alextidd/bj-somatic-variantcalling](https://github.com/alextidd/bj-somatic-variantcalling) (commit hash: ed6a84b)
+
+Please download these into the `nextflow/` subdirectory.
+
+```bash
+$ tree -d nextflow/
+nextflow/                   
+├── bamtofastq
+├── nf-resolveome
+├── bj-dna-qc
+└── bj-somatic-variantcalling
+```
+
+### Running the analysis
 
 Scripts are numbered and intended to be run in the following order.
 
