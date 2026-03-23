@@ -19,7 +19,6 @@ analysis with `Sequoia`, and signature analysis with `HDP`, `sigfit` and
 - [Dependencies](#dependencies)
 - [Data](#data)
 - [How to run](#how-to-run)
-- [Citation](#citation)
 - [License](#license)
 
 ---
