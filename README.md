@@ -102,7 +102,7 @@ COSMIC_v99_WholeGenomeExome_FullAnnotated_chr1.tsv   COSMIC_v99_WholeGenomeExome
 COSMIC_v99_WholeGenomeExome_FullAnnotated_chr20.tsv  COSMIC_v99_WholeGenomeExome_SamplePhenotypeInfo.tsv
 COSMIC_v99_WholeGenomeExome_FullAnnotated_chr21.tsv
 
-head -2 data/rmd_input/cosmic_data/COSMIC_v99_WholeGenomeExome_FullAnnotated_chr1.tsv
+head data/rmd_input/cosmic_data/COSMIC_v99_WholeGenomeExome_FullAnnotated_chr1.tsv
 ```
 |mstr                  |sampleID    | chr|   pos|ref |mut |gene  | strand|ref_cod |mut_cod |ref3_cod |mut3_cod |aachange |ntchange |codonsub |impact     |pid             |
 |:---------------------|:-----------|---:|-----:|:---|:---|:-----|------:|:-------|:-------|:--------|:--------|:--------|:--------|:--------|:----------|:---------------|
@@ -369,7 +369,7 @@ The analysis depends on the following Nextflow pipelines.
 Please download these into the `nextflow/` subdirectory.
 
 ```bash
-$ tree -d nextflow/
+tree -d nextflow/
 nextflow/                   
 ├── bamtofastq
 ├── nf-resolveome
