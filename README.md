@@ -170,13 +170,6 @@ The scripts in this analysis use R (v4.5.0).
 
 Clone the repository.
 
-# TODO: update to zenodo link
-
-```bash
-git clone https://github.com/alextidd/nicola_et_al_2026/
-cd nicola_et_al_2026
-```
-
 Install all dependencies described in the [Dependencies](#dependencies) section
 above. 
 
@@ -358,11 +351,6 @@ Some scripts also use helper functions from the R package
 ### How to run
 
 Clone the repository.
-
-```bash
-git clone https://github.com/alextidd/nicola_et_al_2026/
-cd nicola_et_al_2026
-```
 
 Install all dependencies described in the [Dependencies](#dependencies-1) section
 above. 
