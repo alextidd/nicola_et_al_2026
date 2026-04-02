@@ -72,7 +72,7 @@ RefCDS_noshm_exome <- "./data/rmd_input/noshm_exome_5e-07_B_mem_v3.Rdat"
 RefCDS_noshm_only_codon <- "./data/rmd_input/RefCDS_GRCh37_v1_NSX_noshm_codon.Rdat"
 
 # Within gene dNdS input files
-genomeFile <- "./data/rmd_input/hs37d5.fa" # (must be downloaded)
+genomeFile <- "./data/reference/1kgp/GRCh37/hs37d5.fa" # (must be downloaded)
 per_gene_cov_dir <- "./data/rmd_input/per_gene_per_site_cov/"
 TNFRSF14_ptm_json <- "./data/rmd_input/2025-07-18_TNFRSF14_Uniprot_Q92956_PTM.json"
 TNFRSF14_domain_json <- "./data/rmd_input/2025-07-18_TNFRSF14_Uniprot_Q92956_Domains.json"
@@ -134,10 +134,9 @@ pta_H1_de_novo_per_branch_exposures_file <- "./data/rmd_input/pta/H1_de_novo_per
 pta_H1_de_novo_exposures_per_cell_file <- "./data/rmd_input/pta/H1_de_novo_exposures_per_cell.rds"
 pta_H1_reconstructed_BCR_shm_counts_file <- "./data/rmd_input/pta/H1_reconstructed_BCR_shm_counts_per_cell.tsv"
 
-# PTA input files for donors H2, H3 and H8
+# PTA input files for donors H2 and H8
 pta_additional_annotation_H2_H8_file <- "./data/rmd_input/pta/H2_H8_pta_additional_annotation.tsv"
 pta_dna_hyb_mutation_H2_file <- "./data/rmd_input/pta/H2_PD63121_DNAHyb_filtered_mutations.tsv"
-pta_dna_hyb_mutation_H3_file <- "./data/rmd_input/pta/H3_PD63126_DNAHyb_filtered_mutations.tsv"
 pta_dna_hyb_mutation_H8_file <- "./data/rmd_input/pta/H8_PD66718_DNAHyb_filtered_mutations.tsv"
 pta_dna_hyb_rescued_muts_H8_file <- "./data/rmd_input/pta/H8_PD66718_DNAHyb_rescued_mutations.xlsx"
 
