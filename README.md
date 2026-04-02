@@ -35,7 +35,7 @@ downloaded separately before running any analysis.
 | data/reference/liftover/hg19ToHg38.over.chain.gz | http://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/hg19ToHg38.over.chain.gz |
 | data/reference/nanoseq/SNP_GRCh37.wgns.bed.gz | https://drive.google.com/drive/folders/1wqkgpRTuf4EUhqCGSLA4fIg9qEEw3ZcL |
 | data/reference/cosmic/COSMIC_v3.5_SBS_GRCh38.txt | https://cancer.sanger.ac.uk/signatures/downloads/ |
-| data/reference/gatk/GRCh38/Homo_sapiens_assembly38.fasta.gz | ftp://gsapubftp-anonymous:@ftp.broadinstitute.org/ |
+| data/reference/gatk/GRCh38/Homo_sapiens_assembly38.fasta.gz | [ftp://gsapubftp-anonymous:@ftp.broadinstitute.org/](ftp://gsapubftp-anonymous:@ftp.broadinstitute.org/) |
 | data/reference/1kgp/GRCh37/hs37d5.fa | https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/ |
 
 ### External data (already in repo)
