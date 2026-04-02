@@ -14,7 +14,7 @@
   - [Data](#data)
   - [Dependencies](#dependencies)
   - [How to run](#how-to-run)
-- [Paper analyses](#paper-analyses)
+- [Paper analysis](#paper-analysis)
   - [Data](#data-1)
   - [Dependencies](#dependencies-1)
   - [How to run](#how-to-run-1)
@@ -90,7 +90,7 @@ in the `file` column.
 | data/reference/nanoseq/SNP_GRCh37.wgns.bed.gz | https://drive.google.com/drive/folders/1wqkgpRTuf4EUhqCGSLA4fIg9qEEw3ZcL |
 | data/reference/cosmic/COSMIC_v3.5_SBS_GRCh38.txt | https://cancer.sanger.ac.uk/signatures/downloads/ |
 | data/reference/gatk/GRCh38/Homo_sapiens_assembly38.fasta.gz | [ftp://gsapubftp-anonymous:@ftp.broadinstitute.org/](ftp://gsapubftp-anonymous:@ftp.broadinstitute.org/) |
-| data/reference/1kgp/GRCh37/hs37d5.fa | https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/ |
+| data/reference/1kgp/GRCh37/hs37d5.fa | https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/hs37d5.fa.gz |
 
 ##### BAMs and SNPs
 
@@ -252,7 +252,7 @@ src/resolveome/
 
 ---
 
-## Paper analyses
+## Paper analysis
 
 ### Data
 
@@ -300,7 +300,7 @@ data/rmd_input/
 The following dataset is not included in this repository and must be downloaded
 before running the analysis.
 
-- `data/reference/1kgp/GRCh37/hs37d5.fa` - https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/ |
+- `data/reference/1kgp/GRCh37/hs37d5.fa` - https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/
 
 The following datasets are not included in this repository and must be requested
 and downloaded before running the analysis.
@@ -341,56 +341,70 @@ The scripts in this analysis use R (v4.5.0).
 
 #### R packages
 
-- Rsamtools(v2.26.0)
-- Biostrings(v2.78.0)
-- XVector(v0.50.0)
-- ggpubr(v0.6.2)
-- ggh4x(v0.3.1)
-- ggtree(v4.0.4)
-- ape(v5.8-1)
-- pander(v0.6.6)
-- drc(v3.0-1)
-- gtools(v3.9.5)
-- stringi(v1.8.7)
-- XML(v3.99-0.20)
-- ggforce(v0.5.0)
-- jsonlite(v2.0.0)
-- MASS(v7.3-65)
-- vcfR(v1.15.0)
-- knitr(v1.51)
-- latticeExtra(v0.6-31)
-- lattice(v0.22-6)
-- RColorBrewer(v1.1-3)
-- viridis(v0.6.5)
-- viridisLite(v0.4.3)
-- patchwork(v1.3.2)
-- scales(v1.4.0)
-- dndscv(v0.0.1.0)
-- lubridate(v1.9.4)
-- forcats(v1.0.1)
-- stringr(v1.6.0)
-- dplyr(v1.2.0)
-- purrr(v1.2.1)
-- readr(v2.1.6)
-- tidyr(v1.3.2)
-- tibble(v3.3.1)
-- ggplot2(v4.0.2)
-- tidyverse(v2.0.0)
-- GenomicRanges(v1.62.1)
-- Seqinfo(v1.0.0)
-- IRanges(v2.44.0)
-- S4Vectors(v0.48.0)
-- BiocGenerics(v0.56.0)
-- generics(v0.1.4) 
-- readxl(v1.4.5)
+- `Rsamtools` (v2.26.0)
+- `Biostrings` (v2.78.0)
+- `XVector` (v0.50.0)
+- `ggpubr` (v0.6.2)
+- `ggh4x` (v0.3.1)
+- `ggtree` (v4.0.4)
+- `ape` (v5.8-1)
+- `pander` (v0.6.6)
+- `drc` (v3.0-1)
+- `gtools` (v3.9.5)
+- `stringi` (v1.8.7)
+- `XML` (v3.99-0.20)
+- `ggforce` (v0.5.0)
+- `jsonlite` (v2.0.0)
+- `MASS` (v7.3-65)
+- `vcfR` (v1.15.0)
+- `knitr` (v1.51)
+- `latticeExtra` (v0.6-31)
+- `lattice` (v0.22-6)
+- `RColorBrewer` (v1.1-3)
+- `viridis` (v0.6.5)
+- `viridisLite` (v0.4.3)
+- `patchwork` (v1.3.2)
+- `scales` (v1.4.0)
+- `dndscv` (v0.0.1.0)
+- `lubridate` (v1.9.4)
+- `forcats` (v1.0.1)
+- `stringr` (v1.6.0)
+- `dplyr` (v1.2.0)
+- `purrr` (v1.2.1)
+- `readr` (v2.1.6)
+- `tidyr` (v1.3.2)
+- `tibble` (v3.3.1)
+- `ggplot2` (v4.0.2)
+- `tidyverse` (v2.0.0)
+- `GenomicRanges` (v1.62.1)
+- `Seqinfo` (v1.0.0)
+- `IRanges` (v2.44.0)
+- `S4Vectors` (v0.48.0)
+- `BiocGenerics` (v0.56.0)
+- `generics` (v0.1.4)
+- `readxl` (v1.4.5)
 
 ---
 
 ### How to run
 
-The `src/rmd/dNdS_shm_RefCDS_creation.R` script demonstrates how we generated 
-the RefCDS objects for running dNdSshm. These files are already available in 
-`data/rmd_input/`.
+Clone the repository.
+
+```bash
+git clone https://github.com/alextidd/nicola_et_al_2026/
+cd nicola_et_al_2026
+```
+
+Install all dependencies described in the [Dependencies](#dependencies-1) section
+above. 
+
+Download all data listed in the [Data](#data-1) section above.
+
+#### Running the analysis
+
+The `src/rmd/dNdS_shm_RefCDS_creation.R` script demonstrates how the RefCDS 
+objects can be generated for running dNdSshm. These files are already available 
+in `data/rmd_input/`.
 
 All analyses are contained within the `src/rmd/HashimotoAnalysis.Rmd` 
 Rmarkdown script. Render the report with the following command.
